@@ -6,7 +6,7 @@
     <title>Convite | Realm</title>
     <meta
       name="description"
-      content="Carta-convite interativa para acessar o nosso Realm. Abra a carta, veja a arte da temporada e escaneie o QR code exclusivo."
+      content="Convite oficial para o Realm. Entre no grupo, receba instru&ccedil;&otilde;es exclusivas e convide um amigo para jogar com voc&ecirc;."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,62 +20,40 @@
     <div class="page-noise" aria-hidden="true"></div>
     <main class="invite-shell">
       <header class="invite-header">
-        <p class="invite-eyebrow">Carta registrada</p>
+        <p class="invite-eyebrow">Convite registrado</p>
         <h1>Convite oficial para o nosso Realm</h1>
         <p class="invite-lead">
-          Um convite limitado para exploradores que desejam participar do nosso realm privado. Aceite para abrir a carta,
-          visualizar a arte da temporada e escanear o QR code do acesso.
+          Um convite limitado para exploradores que desejam participar do nosso realm privado. Voc&ecirc; pode convidar
+          um amigo para vir junto com voc&ecirc; e garantir que todo mundo receba acesso e instru&ccedil;&otilde;es ao
+          mesmo tempo.
         </p>
       </header>
 
-      <section class="letter-scene" aria-live="polite">
-        <div class="envelope" id="convite-envelope" data-state="closed">
-          <div class="envelope-shadow" aria-hidden="true"></div>
-          <div class="envelope-back" aria-hidden="true"></div>
-
-          <div class="envelope-letter" role="group" aria-label="QR code exclusivo do Min&eacute;rios Realm">
-            <figure class="letter-qr">
-              <img src="convite.png" alt="QR code do convite do Min&eacute;rios Realm" loading="lazy" decoding="async" />
-            </figure>
-          </div>
-
-          <div class="envelope-front" aria-hidden="true"></div>
-          <div class="envelope-flap" aria-hidden="true"></div>
-        </div>
+      <section class="invite-details" aria-label="Motivos para participar">
+        <article class="detail-card">
+          <h2>Chegue preparado</h2>
+          <p>Receba instru&ccedil;&otilde;es claras, hor&aacute;rios e diretrizes antes de entrar no Realm.</p>
+        </article>
+        <article class="detail-card">
+          <h2>Arte da temporada</h2>
+          <p>Veja os conceitos visuais e projetos em destaque que definem o clima atual.</p>
+        </article>
+        <article class="detail-card">
+          <h2>Comunidade</h2>
+          <p>Converse diretamente com a equipe, alinhe expectativas e combine a chegada com outros exploradores.</p>
+        </article>
       </section>
 
-      <div class="letter-actions">
-        <button class="btn primary" type="button" data-open aria-pressed="false">Quero participar</button>
-        <p class="status-hint" data-status>Quando voc&ecirc; aceitar, a carta se abre.</p>
+      <div class="invite-cta">
+        <a
+          class="btn primary"
+          href="https://chat.whatsapp.com/EqfWq1RLWWuBbpMva3X9bh?mode=wwt"
+          target="_blank"
+          rel="noreferrer noopener"
+          >Quero participar</a
+        >
+        <p class="cta-note">Voc&ecirc; ser&aacute; direcionado para o grupo oficial do Realm no WhatsApp.</p>
       </div>
     </main>
-
-    <script>
-      (() => {
-        const envelope = document.getElementById("convite-envelope");
-        const trigger = document.querySelector("[data-open]");
-        const status = document.querySelector("[data-status]");
-
-        if (!envelope || !trigger) {
-          return;
-        }
-
-        const defaultLabel = trigger.textContent?.trim() || "Quero participar";
-
-        trigger.addEventListener("click", () => {
-          const willOpen = !envelope.classList.contains("is-open");
-          envelope.classList.toggle("is-open", willOpen);
-          envelope.dataset.state = willOpen ? "open" : "closed";
-          trigger.setAttribute("aria-pressed", String(willOpen));
-          trigger.textContent = willOpen ? "Convite aberto" : defaultLabel;
-
-          if (status) {
-            status.textContent = willOpen
-              ? "Carta aberta! Escaneie o QR code."
-              : "Quando voc\u00ea aceitar, a carta se abre.";
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
