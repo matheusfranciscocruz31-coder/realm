@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Convite | Min&eacute;rios Realm</title>
+    <meta
+      name="description"
+      content="Carta-convite interativa para acessar o Min&eacute;rios Realm. Abra a carta, veja a arte da temporada e escaneie o QR code exclusivo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloock&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <main class="invite-shell">
+      <header class="invite-header">
+        <p class="invite-eyebrow">Carta registrada</p>
+        <h1>Convite oficial para o Min&eacute;rios Realm</h1>
+        <p class="invite-lead">
+          Um convite limitado para exploradores que desejam participar do nosso realm privado. Aceite para abrir a carta,
+          visualizar a arte da temporada e escanear o QR code do acesso.
+        </p>
+      </header>
+
+      <section class="letter-scene" aria-live="polite">
+        <div class="envelope" id="convite-envelope" data-state="closed">
+          <div class="envelope-shadow" aria-hidden="true"></div>
+          <div class="envelope-back" aria-hidden="true"></div>
+
+          <div class="envelope-letter" role="group" aria-label="QR code exclusivo do Min&eacute;rios Realm">
+            <figure class="letter-qr">
+              <img src="convite.png" alt="QR code do convite do Min&eacute;rios Realm" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+
+          <div class="envelope-front" aria-hidden="true"></div>
+          <div class="envelope-flap" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <div class="letter-actions">
+        <button class="btn primary" type="button" data-open aria-pressed="false">Quero participar</button>
+        <p class="status-hint" data-status>Quando voc&ecirc; aceitar, a carta se abre.</p>
+      </div>
+    </main>
+
+    <script>
+      (() => {
+        const envelope = document.getElementById("convite-envelope");
+        const trigger = document.querySelector("[data-open]");
+        const status = document.querySelector("[data-status]");
+
+        if (!envelope || !trigger) {
+          return;
+        }
+
+        const defaultLabel = trigger.textContent?.trim() || "Quero participar";
+
+        trigger.addEventListener("click", () => {
+          const willOpen = !envelope.classList.contains("is-open");
+          envelope.classList.toggle("is-open", willOpen);
+          envelope.dataset.state = willOpen ? "open" : "closed";
+          trigger.setAttribute("aria-pressed", String(willOpen));
+          trigger.textContent = willOpen ? "Convite aberto" : defaultLabel;
+
+          if (status) {
+            status.textContent = willOpen
+              ? "Carta aberta! Escaneie o QR code."
+              : "Quando voc\u00ea aceitar, a carta se abre.";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
